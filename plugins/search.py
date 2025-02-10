@@ -68,8 +68,14 @@ async def search(bot, message):
         reply_message = message.reply_to_message if message.reply_to_message else None
 
         # Search in channels
+        search_tasks = []
         for channel in channels:
-            async for msg in User.search_messages(chat_id=channel, query=query):
+            search_tasks.append(User.search_messages(chat_id=channel, query=query))
+        
+        search_results = await asyncio.gather(*search_tasks)
+        
+        for msgs in search_results:
+            for msg in msgs:
                 name = (msg.text or msg.caption).split("\n")[0]
                 if name in results:
                     continue
@@ -139,8 +145,14 @@ async def recheck(bot, update):
         reply_message = update.message.reply_to_message if update.message.reply_to_message else None
 
         # Search in channels
+        search_tasks = []
         for channel in channels:
-            async for msg in User.search_messages(chat_id=channel, query=query):
+            search_tasks.append(User.search_messages(chat_id=channel, query=query))
+        
+        search_results = await asyncio.gather(*search_tasks)
+        
+        for msgs in search_results:
+            for msg in msgs:
                 name = (msg.text or msg.caption).split("\n")[0]
                 if name in results:
                     continue
