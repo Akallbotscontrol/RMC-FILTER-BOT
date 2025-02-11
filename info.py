@@ -7,7 +7,7 @@
 import os
 from os import environ
 
-API_ID       = int(environ.get("API_ID", "22289037"))
+API_ID       = int(environ.get("API_ID", "29034951"))
 API_HASH     = environ.get("API_HASH", "cfc8448de6746a6ccf9dc1812cf1c8f7")
 BOT_TOKEN    = environ.get("BOT_TOKEN", "")
 DATABASE_URI = environ.get("DATABASE_URI", "")
