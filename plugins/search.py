@@ -57,7 +57,7 @@ async def search(bot, message):
             buttons = []
             for movie in movies:
                 buttons.append([InlineKeyboardButton(movie['title'], callback_data=f"recheck_{movie['id']}")])
-            msg = await message.reply_photo(
+            await message.reply_photo(
                 photo="https://graph.org/file/c361a803c7b70fc50d435.jpg",
                 caption="<b><I>🔻 I Couldn't find anything related to Your Query😕.\n🔺 Did you mean any of these?</I></b>",
                 reply_markup=InlineKeyboardMarkup(buttons),
@@ -87,7 +87,7 @@ async def recheck(bot, update):
     if clicked != typed:
         return await update.answer("That's not for you! 👀", show_alert=True)
 
-    m = await update.message.edit("Searching..💥")
+    await update.message.edit("Searching..💥")
     id = update.data.split("_")[-1]
     query = await search_imdb(id)
     channels = (await get_group(update.message.chat.id))["channels"]
@@ -102,7 +102,7 @@ async def recheck(bot, update):
                     continue
                 results += f"<b><I>♻️🍿 {name}</I></b>\n\n🔗 {msg.link}</I></b>\n\n"
 
-if not results:
+        if not results:
             return await update.message.edit(
                 "🔺 Still no results found! Please Request To Group Admin 🔻",
                 reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🎯 Request To Admin 🎯", callback_data=f"request_{id}")]])
