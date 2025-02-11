@@ -8,7 +8,7 @@ import os
 from os import environ
 
 API_ID       = int(environ.get("API_ID", "22289037"))
-API_HASH     = environ.get("API_HASH", "ced5a994db436661f9af63c4b5247ac6")
+API_HASH     = environ.get("API_HASH", "cfc8448de6746a6ccf9dc1812cf1c8f7")
 BOT_TOKEN    = environ.get("BOT_TOKEN", "")
 DATABASE_URI = environ.get("DATABASE_URI", "")
 LOG_CHANNEL  = int(environ.get("LOG_CHANNEL", "-1002487071726"))
